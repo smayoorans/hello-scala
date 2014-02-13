@@ -3,6 +3,6 @@ modules/.idea_modules/
 modules/project/target/
 modules/project/project/
 modules/target/
-modules/wap/target/
+modules/web/target/
 *.iml
 .history
