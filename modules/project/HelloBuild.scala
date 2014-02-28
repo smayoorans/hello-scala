@@ -17,6 +17,8 @@ object HelloBuild extends Build {
   val BouncyCastle                      = "bouncycastle"                    %   "bcprov-jdk14"              % "124"
   val CommonsCodec                      = "commons-codec"                   %   "commons-codec"             % "1.5"
 
+  val LiftJson                          = "net.liftweb"                     %%  "lift-json"                 % "2.5+"
+
   val SpringCore                        = "org.springframework"             %   "spring-core"               % SpringVersion
   val SpringExpression                  = "org.springframework"             %   "spring-expression"         % SpringVersion
   val SpringBeans                       = "org.springframework"             %   "spring-beans"              % SpringVersion
@@ -82,7 +84,8 @@ object HelloBuild extends Build {
     CommonsCodec,
     JodaTime,
     JodaConvert,
-    JodaTimeTags
+    JodaTimeTags,
+    LiftJson
   )
 
   val testDependencies = Seq(
