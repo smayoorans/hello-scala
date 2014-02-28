@@ -7,7 +7,7 @@ import sbt.ExclusionRule
 import sbt.ScalaVersion
 
 object HelloBuild extends Build {
-  val ProjectVersion  = "1.0.8"
+  val ProjectVersion  = "1.0.1"
   val Organization    = "org.guru.mayoo"
 
   val ScalaVersion    = "2.10.0"
@@ -75,6 +75,16 @@ object HelloBuild extends Build {
     JodaTimeTags
   )
 
+  val coreDependencies = Seq(
+    Jstl,
+    TypesafeLogging,
+    TypesafeConfig,
+    CommonsCodec,
+    JodaTime,
+    JodaConvert,
+    JodaTimeTags
+  )
+
   val testDependencies = Seq(
     "org.scalamock"         %% "scalamock-specs2-support"     % "3.0.1"         % "test",
     "hms.specs"             %% "specs-matchers"               % "0.1.0"         % "test"
@@ -112,6 +122,14 @@ object HelloBuild extends Build {
         (config: ScalaVersion, module: ModuleID, artifact: Artifact) => "hello-scala" + "." + "war"
       },
       libraryDependencies ++= webDependencies,
+      libraryDependencies ++= testDependencies
+    )
+  )
+
+  lazy val core = Project(id = "core", base = file("core"),
+    settings = baseSettings ++ Seq(
+      name := "core",
+      libraryDependencies ++= coreDependencies,
       libraryDependencies ++= testDependencies
     )
   )

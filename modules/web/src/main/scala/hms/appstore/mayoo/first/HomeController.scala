@@ -1,4 +1,4 @@
-package hms.appstore.mayoo.controller
+package hms.appstore.mayoo.first
 
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.{RequestMapping, RequestMethod}
