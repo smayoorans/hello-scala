@@ -3,3 +3,8 @@
 core/target/*
 web/target/*
 target/*
+
+project/target/
+project/project/
+*.iml
+.history

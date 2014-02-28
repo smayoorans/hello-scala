@@ -1,8 +1,0 @@
-modules/.idea/
-modules/.idea_modules/
-modules/project/target/
-modules/project/project/
-modules/target/
-modules/web/target/
-*.iml
-.history
