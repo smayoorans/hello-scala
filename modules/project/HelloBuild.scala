@@ -7,24 +7,16 @@ import sbt.ExclusionRule
 import sbt.ScalaVersion
 
 object HelloBuild extends Build {
-  val ProjectVersion  = "1.0.1"
-  val Organization    = "org.guru.mayoo"
+  val ProjectVersion = "1.0.1-SNAPSHOT"
+  val Organization = "com.guru.mayoo"
 
-  val ScalaVersion    = "2.10.0"
-  val SpringVersion   = "3.2.3.RELEASE"
-  val JettyVersion    = "8.1.13.v20130916"
+  val ScalaVersion = "2.10.0"
+  val SpringVersion = "3.2.3.RELEASE"
+  val JettyVersion = "8.1.13.v20130916"
 
-
-  val SpringCore                        = "org.springframework"             %   "spring-core"               % SpringVersion
-  val SpringExpression                  = "org.springframework"             %   "spring-expression"         % SpringVersion
-  val SpringBeans                       = "org.springframework"             %   "spring-beans"              % SpringVersion
-  val SpringAop                         = "org.springframework"             %   "spring-aop"                % SpringVersion
-  val SpringContext                     = "org.springframework"             %   "spring-context"            % SpringVersion
-  val SpringContextSupport              = "org.springframework"             %   "spring-context-support"    % SpringVersion
-  val SpringOxm                         = "org.springframework"             %   "spring-oxm"                % SpringVersion
-  val SpringWeb                          = "org.springframework"             %   "spring-web"                % SpringVersion
-  val SpringMvc                         = "org.springframework"             %   "spring-webmvc"             % SpringVersion
-//  val SpringTest                        = "org.springframework"             %   "spring-test"               % SpringVersion
+  val SpringCore = "org.springframework" % "spring-core" % SpringVersion
+  val SpringWeb = "org.springframework" % "spring-web" % SpringVersion
+  val SpringMvc = "org.springframework" % "spring-webmvc" % SpringVersion
 
   val ServletApi                        = "javax.servlet"                   %   "javax.servlet-api"         % "3.0.1"         % "provided->default"
   val Jstl                              = "jstl"                            %   "jstl"                      % "1.2"
@@ -33,9 +25,6 @@ object HelloBuild extends Build {
 
   val JettyWebAppContainer              = "org.eclipse.jetty"               %   "jetty-webapp"              % JettyVersion    % "container"
   val JettyJspContainer                 = "org.eclipse.jetty"               %   "jetty-jsp"                 % JettyVersion    % "container" excludeAll(ExclusionRule(organization = "org.slf4j"))
-
-  val TypesafeConfig                    = "com.typesafe"                    %   "config"                    % "1.0.0"
-//  val TypesafeLogging                   = "com.typesafe"                    %%  "scalalogging-slf4j"        % "1.0.1"
 
   val jettyConf = config("container")
 
@@ -49,22 +38,11 @@ object HelloBuild extends Build {
 
   val webDependencies = Seq(
     SpringCore,
-    SpringExpression,
-    SpringBeans,
-    SpringAop,
-    SpringContext,
-    SpringContextSupport,
-    SpringOxm,
     SpringWeb,
     SpringMvc,
-//    SpringTest,
-    Jstl,
-    ServletApi,
-    TypesafeConfig,
-    SiteMesh
+    ServletApi
   )
 
- 
 
   val moduleLookupConfigurations = DefaultResolver.moduleConfig
 
@@ -93,12 +71,11 @@ object HelloBuild extends Build {
 
   lazy val web = Project(id = "web", base = file("web"),
     settings = baseSettings ++ webSettings ++ jettyPluginSettings ++ Seq(
-      name := "web",
+      name := "scala-web",
       artifactName := {
         (config: ScalaVersion, module: ModuleID, artifact: Artifact) => "hello-scala" + "." + "war"
       },
       libraryDependencies ++= webDependencies
-    
     )
   )
 }
