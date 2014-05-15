@@ -14,10 +14,6 @@ object HelloBuild extends Build {
   val SpringVersion   = "3.2.3.RELEASE"
   val JettyVersion    = "8.1.13.v20130916"
 
-  val BouncyCastle                      = "bouncycastle"                    %   "bcprov-jdk14"              % "124"
-  val CommonsCodec                      = "commons-codec"                   %   "commons-codec"             % "1.5"
-
-  val LiftJson                          = "net.liftweb"                     %%  "lift-json"                 % "2.5+"
 
   val SpringCore                        = "org.springframework"             %   "spring-core"               % SpringVersion
   val SpringExpression                  = "org.springframework"             %   "spring-expression"         % SpringVersion
@@ -26,23 +22,20 @@ object HelloBuild extends Build {
   val SpringContext                     = "org.springframework"             %   "spring-context"            % SpringVersion
   val SpringContextSupport              = "org.springframework"             %   "spring-context-support"    % SpringVersion
   val SpringOxm                         = "org.springframework"             %   "spring-oxm"                % SpringVersion
-  val SpringWeb                         = "org.springframework"             %   "spring-web"                % SpringVersion
+  val SpringWeb                          = "org.springframework"             %   "spring-web"                % SpringVersion
   val SpringMvc                         = "org.springframework"             %   "spring-webmvc"             % SpringVersion
-  val SpringTest                        = "org.springframework"             %   "spring-test"               % SpringVersion
+//  val SpringTest                        = "org.springframework"             %   "spring-test"               % SpringVersion
 
   val ServletApi                        = "javax.servlet"                   %   "javax.servlet-api"         % "3.0.1"         % "provided->default"
   val Jstl                              = "jstl"                            %   "jstl"                      % "1.2"
   val SiteMesh                          = "org.sitemesh"                    %   "sitemesh"                  % "3.0-alpha-2"
 
-  val JodaTime                          = "joda-time"                       % "joda-time"                   % "2.1"
-  val JodaTimeTags                      = "joda-time"                       % "joda-time-jsptags"           % "1.1.1"
-  val JodaConvert                       = "org.joda"                        % "joda-convert"                % "1.2"
 
   val JettyWebAppContainer              = "org.eclipse.jetty"               %   "jetty-webapp"              % JettyVersion    % "container"
   val JettyJspContainer                 = "org.eclipse.jetty"               %   "jetty-jsp"                 % JettyVersion    % "container" excludeAll(ExclusionRule(organization = "org.slf4j"))
 
   val TypesafeConfig                    = "com.typesafe"                    %   "config"                    % "1.0.0"
-  val TypesafeLogging                   = "com.typesafe"                    %%  "scalalogging-slf4j"        % "1.0.1"
+//  val TypesafeLogging                   = "com.typesafe"                    %%  "scalalogging-slf4j"        % "1.0.1"
 
   val jettyConf = config("container")
 
@@ -55,7 +48,6 @@ object HelloBuild extends Build {
   )
 
   val webDependencies = Seq(
-    BouncyCastle,
     SpringCore,
     SpringExpression,
     SpringBeans,
@@ -65,33 +57,14 @@ object HelloBuild extends Build {
     SpringOxm,
     SpringWeb,
     SpringMvc,
-    SpringTest,
+//    SpringTest,
     Jstl,
     ServletApi,
-    TypesafeLogging,
     TypesafeConfig,
-    SiteMesh,
-    CommonsCodec,
-    JodaTime,
-    JodaConvert,
-    JodaTimeTags
+    SiteMesh
   )
 
-  val coreDependencies = Seq(
-    Jstl,
-    TypesafeLogging,
-    TypesafeConfig,
-    CommonsCodec,
-    JodaTime,
-    JodaConvert,
-    JodaTimeTags,
-    LiftJson
-  )
-
-  val testDependencies = Seq(
-    "org.scalamock"         %% "scalamock-specs2-support"     % "3.0.1"         % "test",
-    "hms.specs"             %% "specs-matchers"               % "0.1.0"         % "test"
-  )
+ 
 
   val moduleLookupConfigurations = DefaultResolver.moduleConfig
 
@@ -124,16 +97,8 @@ object HelloBuild extends Build {
       artifactName := {
         (config: ScalaVersion, module: ModuleID, artifact: Artifact) => "hello-scala" + "." + "war"
       },
-      libraryDependencies ++= webDependencies,
-      libraryDependencies ++= testDependencies
-    )
-  )
-
-  lazy val core = Project(id = "core", base = file("core"),
-    settings = baseSettings ++ Seq(
-      name := "core",
-      libraryDependencies ++= coreDependencies,
-      libraryDependencies ++= testDependencies
+      libraryDependencies ++= webDependencies
+    
     )
   )
 }

@@ -5,14 +5,14 @@
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN"
 "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">
 <html xml:lang="en">
-<fmt:bundle basename="messages">
+
 <head>
-    <title><fmt:message key="page.title"/></title>
+    <title>Welcome to Hello Scala</title>
 </head>
 <body>
 
-<h1>Hello World</h1>
+<h1>Welcome to Hello Scala</h1>
 
 </body>
-</fmt:bundle>
+
 </html>
