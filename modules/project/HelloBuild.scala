@@ -39,7 +39,7 @@ object HelloBuild extends Build {
     ServletApi
   )
 
-  val excludedFilesInJar: NameFilter = (s: String) => """(.*?)\.(properties|props|conf|dsl|txt|xml)$""".r.pattern.matcher(s).matches
+//  val excludedFilesInJar: NameFilter = (s: String) => """(.*?)\.(properties|props|conf|dsl|txt|xml)$""".r.pattern.matcher(s).matches
 
   lazy val baseSettings = {
     Defaults.defaultSettings ++ Seq(

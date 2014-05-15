@@ -1,6 +1,6 @@
 .idea/*
 .idea_modules/*
-web/target/*
+scala-web/target/*
 target/*
 
 project/target/

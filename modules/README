@@ -1,3 +1,27 @@
---------------------------------------------
-Hello Scala
---------------------------------------------
+Hello World Web Application
+===========================
+
+Installation Steps
+==================
+
+1) Clone the project source code from github using following command
+
+git clone git@github.com:smayoorans/hello-scala.git
+
+or
+
+git clone https://github.com/smayoorans/hello-scala.git
+
+2) Go the project Directory using terminal
+   "cd hello-scala/modules"
+
+3) Type following command
+    ./sbt
+
+4) Once you got the sbt console, type the following command
+    >container:start
+
+5) Go to your browser, type following url
+    http://localhost:8081/
+
+
