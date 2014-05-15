@@ -1,6 +1,5 @@
 import sbt._
 import Keys._
-import repositories._
 import com.github.siasia.PluginKeys._
 import com.github.siasia.WebPlugin._
 import sbt.ExclusionRule
@@ -18,13 +17,10 @@ object HelloBuild extends Build {
   val SpringWeb = "org.springframework" % "spring-web" % SpringVersion
   val SpringMvc = "org.springframework" % "spring-webmvc" % SpringVersion
 
-  val ServletApi                        = "javax.servlet"                   %   "javax.servlet-api"         % "3.0.1"         % "provided->default"
-  val Jstl                              = "jstl"                            %   "jstl"                      % "1.2"
-  val SiteMesh                          = "org.sitemesh"                    %   "sitemesh"                  % "3.0-alpha-2"
+  val ServletApi = "javax.servlet" % "javax.servlet-api" % "3.0.1" % "provided->default"
 
-
-  val JettyWebAppContainer              = "org.eclipse.jetty"               %   "jetty-webapp"              % JettyVersion    % "container"
-  val JettyJspContainer                 = "org.eclipse.jetty"               %   "jetty-jsp"                 % JettyVersion    % "container" excludeAll(ExclusionRule(organization = "org.slf4j"))
+  val JettyWebAppContainer = "org.eclipse.jetty" % "jetty-webapp" % JettyVersion % "container"
+  val JettyJspContainer = "org.eclipse.jetty" % "jetty-jsp" % JettyVersion % "container" excludeAll (ExclusionRule(organization = "org.slf4j"))
 
   val jettyConf = config("container")
 
@@ -43,9 +39,6 @@ object HelloBuild extends Build {
     ServletApi
   )
 
-
-  val moduleLookupConfigurations = DefaultResolver.moduleConfig
-
   val excludedFilesInJar: NameFilter = (s: String) => """(.*?)\.(properties|props|conf|dsl|txt|xml)$""".r.pattern.matcher(s).matches
 
   lazy val baseSettings = {
@@ -55,7 +48,6 @@ object HelloBuild extends Build {
       scalaVersion := ScalaVersion,
       scalacOptions += "-deprecation",
       scalacOptions += "-unchecked",
-      moduleConfigurations ++= moduleLookupConfigurations,
       logBuffered := false,
       parallelExecution in Test := false,
       offline := true
@@ -69,7 +61,7 @@ object HelloBuild extends Build {
   ) aggregate web
 
 
-  lazy val web = Project(id = "web", base = file("web"),
+  lazy val web = Project(id = "web-module", base = file("scala-web"),
     settings = baseSettings ++ webSettings ++ jettyPluginSettings ++ Seq(
       name := "scala-web",
       artifactName := {
