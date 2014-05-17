@@ -1,51 +1,40 @@
 import sbt._
 import Keys._
-import com.github.siasia.PluginKeys._
 import com.github.siasia.WebPlugin._
 import sbt.ExclusionRule
 import sbt.ScalaVersion
 
 object HelloBuild extends Build {
-  val ProjectVersion = "1.0.1"
-  val Organization = "com.guru.mayoo"
+  val projectVersion        = "1.0.1-SNAPSHOT"
+  val projectOrganization   = "com.guru.mayoo"
 
-  val ScalaVersion = "2.10.0"
-  val SpringVersion = "3.2.3.RELEASE"
-  val JettyVersion = "8.1.13.v20130916"
+  val scalaVersions         = "2.10.0"
+  val springVersion         = "3.2.3.RELEASE"
+  val jettyVersion          = "8.1.13.v20130916"
 
-  val SpringCore = "org.springframework" % "spring-core" % SpringVersion
-  val SpringWeb = "org.springframework" % "spring-web" % SpringVersion
-  val SpringMvc = "org.springframework" % "spring-webmvc" % SpringVersion
+  val springCore            = "org.springframework"         % "spring-core"           % springVersion
+  val springWeb             = "org.springframework"         % "spring-web"            % springVersion
+  val springMvc             = "org.springframework"         % "spring-webmvc"         % springVersion
 
-  val ServletApi = "javax.servlet" % "javax.servlet-api" % "3.0.1" % "provided->default"
+  val servletApi            = "javax.servlet"               % "javax.servlet-api"     % "3.0.1" % "provided->default"
 
-  val JettyWebAppContainer = "org.eclipse.jetty" % "jetty-webapp" % JettyVersion % "container"
-  val JettyJspContainer = "org.eclipse.jetty" % "jetty-jsp" % JettyVersion % "container" excludeAll (ExclusionRule(organization = "org.slf4j"))
-
-  val jettyConf = config("container")
-
-  val jettyPluginSettings = Seq(
-    libraryDependencies ++= Seq(
-      JettyWebAppContainer,
-      JettyJspContainer
-    ),
-    port in jettyConf := 8081
-  )
+  val jettyWebAppContainer  = "org.eclipse.jetty"           % "jetty-webapp"          % jettyVersion % "container"
+  val jettyJspContainer     = "org.eclipse.jetty"           % "jetty-jsp"             % jettyVersion % "container" excludeAll ExclusionRule(organization = "org.slf4j")
 
   val webDependencies = Seq(
-    SpringCore,
-    SpringWeb,
-    SpringMvc,
-    ServletApi
+    springCore,
+    springWeb,
+    springMvc,
+    servletApi,
+    jettyWebAppContainer,
+    jettyJspContainer
   )
-
-//  val excludedFilesInJar: NameFilter = (s: String) => """(.*?)\.(properties|props|conf|dsl|txt|xml)$""".r.pattern.matcher(s).matches
 
   lazy val baseSettings = {
     Defaults.defaultSettings ++ Seq(
-      version := ProjectVersion,
-      organization := Organization,
-      scalaVersion := ScalaVersion,
+      version := projectVersion,
+      organization := projectOrganization,
+      scalaVersion := scalaVersions,
       scalacOptions += "-deprecation",
       scalacOptions += "-unchecked",
       logBuffered := false,
@@ -62,7 +51,7 @@ object HelloBuild extends Build {
 
 
   lazy val web = Project(id = "web-module", base = file("scala-web"),
-    settings = baseSettings ++ webSettings ++ jettyPluginSettings ++ Seq(
+    settings = baseSettings ++ webSettings ++ Seq(
       name := "scala-web",
       artifactName := {
         (config: ScalaVersion, module: ModuleID, artifact: Artifact) => "hello-scala" + "." + "war"
