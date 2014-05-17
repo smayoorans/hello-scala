@@ -1,9 +1,11 @@
+#Idea files
 .idea/*
 .idea_modules/*
-scala-web/target/*
-target/*
 
-project/target/
-project/project/
+#Scala project build files
+target/*
+project/target/*
+project/project/*
 *.iml
-.history
+
+scala-web/target/*
