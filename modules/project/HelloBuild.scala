@@ -9,23 +9,20 @@ object HelloBuild extends Build {
   val projectOrganization   = "com.guru.mayoo"
 
   val scalaVersions         = "2.10.0"
-  val springVersion         = "3.2.3.RELEASE"
+  val springVersion         = "4.0.3.RELEASE"
   val jettyVersion          = "8.1.13.v20130916"
 
   val springCore            = "org.springframework"         % "spring-core"           % springVersion
   val springWeb             = "org.springframework"         % "spring-web"            % springVersion
   val springMvc             = "org.springframework"         % "spring-webmvc"         % springVersion
 
-  val servletApi            = "javax.servlet"               % "javax.servlet-api"     % "3.0.1" % "provided->default"
-
-  val jettyWebAppContainer  = "org.eclipse.jetty"           % "jetty-webapp"          % jettyVersion % "container"
-  val jettyJspContainer     = "org.eclipse.jetty"           % "jetty-jsp"             % jettyVersion % "container" excludeAll ExclusionRule(organization = "org.slf4j")
+  val jettyWebAppContainer  = "org.eclipse.jetty"           % "jetty-webapp"          % jettyVersion  % "container"
+  val jettyJspContainer     = "org.eclipse.jetty"           % "jetty-jsp"             % jettyVersion  % "container" excludeAll ExclusionRule(organization = "org.slf4j")
 
   val webDependencies = Seq(
     springCore,
     springWeb,
     springMvc,
-    servletApi,
     jettyWebAppContainer,
     jettyJspContainer
   )
