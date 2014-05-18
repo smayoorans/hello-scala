@@ -5,7 +5,7 @@ import sbt.ExclusionRule
 import sbt.ScalaVersion
 
 object HelloBuild extends Build {
-  val projectVersion        = "1.0.1"
+  val projectVersion        = "1.0.2-SNAPSHOT"
   val projectOrganization   = "com.guru.mayoo"
 
   val scalaVersions         = "2.10.0"
