@@ -19,12 +19,18 @@ object HelloBuild extends Build {
   val jettyWebAppContainer  = "org.eclipse.jetty"           % "jetty-webapp"          % jettyVersion  % "container"
   val jettyJspContainer     = "org.eclipse.jetty"           % "jetty-jsp"             % jettyVersion  % "container" excludeAll ExclusionRule(organization = "org.slf4j")
 
+  val typesafeAkka          = "com.typesafe.akka"           %  "akka-actor_2.10"      % "2.3.2"
+
   val webDependencies = Seq(
     springCore,
     springWeb,
     springMvc,
     jettyWebAppContainer,
     jettyJspContainer
+  )
+
+  val actorDependencies = Seq(
+    typesafeAkka
   )
 
   lazy val baseSettings = {
@@ -54,6 +60,13 @@ object HelloBuild extends Build {
         (config: ScalaVersion, module: ModuleID, artifact: Artifact) => "hello-scala" + "." + "war"
       },
       libraryDependencies ++= webDependencies
+    )
+  )
+
+  lazy val actor = Project(id = "actor-module", base = file("scala-actor"),
+    settings = baseSettings ++ Seq(
+      name := "scala-actor",
+      libraryDependencies ++= actorDependencies
     )
   )
 }
